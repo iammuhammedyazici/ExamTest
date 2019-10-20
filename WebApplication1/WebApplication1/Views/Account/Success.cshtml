@@ -1,0 +1,115 @@
+﻿@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Success</title>
+</head>
+<style>
+    h1 {
+    text-align:center;
+}
+
+form {
+    text-align:center;
+}
+
+#next {
+  margin-top:30px;
+}
+</style>
+<script>
+var allQuestions = [];
+
+    allQuestions[0] = {
+    question: "Inside Olympic Destroyer, the Most Deceptive Hack in History",
+    choices: ["Yes", "No", "Okey"],
+    correctAnswer: 3
+};
+allQuestions[1] = {
+    question: "Inside Olympic Destroyer, the Most Deceptive Hack in History",
+    choices: ["Yes", "No", "Okey"],
+    correctAnswer: 2
+};
+allQuestions[2] = {
+    question: "Inside Olympic Destroyer, the Most Deceptive Hack in History",
+    choices: ["Yes", "No", "Okey"],
+    correctAnswer: 1
+};
+allQuestions[3] = {
+     question: "Inside Olympic Destroyer, the Most Deceptive Hack in History",
+    choices: ["Yes", "No", "Okey"],
+    correctAnswer: 0
+};
+
+document.getElementById("question").textContent = allQuestions[0].question;
+
+document.getElementById("choice0").textContent = allQuestions[0].choices[0];
+
+document.getElementById("choice1").textContent = allQuestions[0].choices[1];
+
+document.getElementById("choice2").textContent = allQuestions[0].choices[2];
+
+document.getElementById("choice3").textContent = allQuestions[0].choices[3];
+
+
+var userScore = 0;
+
+var questionNum = 0;
+
+  $("#next").click(function() {
+  if($("form input[name=answer]:checked").val() == allQuestions[questionNum].correctAnswer) {
+    userScore++;
+  }
+  
+    if (questionNum == (allQuestions.length - 1)) {
+    document.getElementsByTagName("form")[0].style.display = "none";
+      
+    document.getElementById("question").textContent ="Your score is " + userScore + " out of 3.";
+    }
+    questionNum++;
+  
+    document.getElementById("question").textContent = allQuestions[questionNum].question;
+
+    document.getElementById("choice0").textContent = allQuestions[questionNum].choices[0];
+
+    document.getElementById("choice1").textContent = allQuestions[questionNum].choices[1];
+
+      document.getElementById("choice2").textContent = allQuestions[questionNum].choices[2];
+
+    document.getElementById("choice3").textContent = allQuestions[questionNum].choices[3];
+
+	});
+</script>
+<body>
+
+    <h3>Success Page</h3>
+    Welcome @Context.Session.GetString("username")
+    <br>
+    <body>
+        <h1 id="question"></h1>
+
+        <form>
+            <input type="radio" name="answer" value="0" id="ans0"> <span id="choice0"></span> </input>
+
+            <input type="radio" name="answer" value="1" id="ans1"> <span id="choice1"></span> </input>
+
+            <input type="radio" name="answer" value="2" id="ans2"> <span id="choice2"></span> </input>
+
+            <br>
+
+            <input type="button" name="next" value="Next Question" id="next" />
+
+        </form>
+    </body>
+
+    <a asp-controller="account" asp-action="logout">Logout</a>
+
+</body>
+</html>
